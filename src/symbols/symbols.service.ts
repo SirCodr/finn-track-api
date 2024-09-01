@@ -44,8 +44,8 @@ export class SymbolsService {
 
     for(const [index, date] of dates.entries()) {
       if (date === lastDate) {
-        finalSymbolValuation = symbolClosedQuotes[index]
-        finalQuoteCurrency = currencyClosedQuotes[index]
+        finalSymbolValuation = symbolClosedQuotes.at(-1)
+        finalQuoteCurrency = currencyClosedQuotes.at(-1)
         break
       }
 
