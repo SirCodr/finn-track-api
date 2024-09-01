@@ -7,7 +7,6 @@ export class SymbolHistoryFetchOptionsDto {
 }
 
 export class TrackedSymbolProfitFetchDto {
-  symbol: string
   currency: string
   startDate: string
   endDate: string
