@@ -1,7 +1,15 @@
 import { FetchStockPeriodOptions } from "../types"
 
 export class SymbolHistoryFetchOptionsDto {
-  startTimestamp: number
-  endTimestamp: number
-  interval: FetchStockPeriodOptions
+  startDate: string
+  endDate: string
+  interval: string
+}
+
+export class TrackedSymbolProfitFetchDto {
+  symbol: string
+  currency: string
+  startDate: string
+  endDate: string
+  interval: string
 }

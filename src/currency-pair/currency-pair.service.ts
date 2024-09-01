@@ -1,17 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { ForexApiService } from 'src/api/api.service';
-import { CurrencyPairFetchParams } from 'src/symbols/types';
+import { StockApiService } from 'src/api/api.service';
+import { CurrencyPairFetchParams, CurrencyPairHistoryResponse } from 'src/symbols/types';
 
 @Injectable()
 export class CurrencyPairService {
-  constructor(private forexApi: ForexApiService){}
+  constructor(private sctokApi: StockApiService){}
 
-  async findCurrencyPair(props: CurrencyPairFetchParams) {
-    const { fromCurrency, toCurrency, startDate, endDate, interval } = props
-    return await this.forexApi.get('time_series', {
-      symbol: `${fromCurrency}/${toCurrency}`,
-      start_date: startDate,
-      end_date: endDate,
+  async findCurrencyPair(symbol: string, props: CurrencyPairFetchParams) {
+    const { startDate, endDate, interval } = props
+    return await this.sctokApi.get<CurrencyPairHistoryResponse>(`chart/${symbol}`, {
+      period1: startDate,
+      period2: endDate,
       interval
     })
   }

@@ -1,6 +1,5 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
-import { StockApiService } from 'src/api/api.service';
-import { SymbolHistoryFetchOptionsDto } from './dto/symbol.dto';
+import { SymbolHistoryFetchOptionsDto, TrackedSymbolProfitFetchDto } from './dto/symbol.dto';
 import { SymbolsService } from './symbols.service';
 
 @Controller('symbols')
@@ -9,8 +8,15 @@ export class SymbolsController {
 
   @Get(':symbol')
   async findSymbolHistory(@Param('symbol') symbol: string, @Query() options: SymbolHistoryFetchOptionsDto) {
-  const response = await this.symbolsService.findSymbolHistory(symbol, options)
+    const response = await this.symbolsService.findSymbolHistory(symbol, options)
 
-  return response.data
+    return response.data
+  }
+
+  @Get(':symbol/track-profit')
+  async findTrackedSymbolProfit(@Param('symbol') symbol: string, @Query() params: TrackedSymbolProfitFetchDto) {
+    const res =  await this.symbolsService.findTrackedSymbolProfit(symbol, params)
+    
+    return res
   }
 }
