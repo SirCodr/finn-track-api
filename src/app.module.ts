@@ -5,6 +5,7 @@ import { SymbolsModule } from './symbols/symbols.module'
 import { ApiModule } from './api/api.module'
 import { ConfigModule } from '@nestjs/config'
 import { CurrencyPairModule } from './currency-pair/currency-pair.module';
+import { SavingsModule } from './savings/savings.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { CurrencyPairModule } from './currency-pair/currency-pair.module';
     SymbolsModule,
     ApiModule,
     CurrencyPairModule,
+    SavingsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
