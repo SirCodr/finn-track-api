@@ -13,10 +13,10 @@ export type CurrencyPairFetchParams = {
 }
 
 export type TrackedSymbolProfitFetchParams = {
+  amount: number
   currency: string
   startDate: string
   endDate: string
-  interval: string
 }
 
 export interface CurrencyPairHistoryResponse {

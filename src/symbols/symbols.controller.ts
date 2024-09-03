@@ -14,7 +14,7 @@ export class SymbolsController {
   }
 
   @Get(':symbol/track-profit')
-  async findTrackedSymbolProfit(@Param('symbol') symbol: string, @Query() params: TrackedSymbolProfitFetchDto) {
+  async findTrackedSymbolProfitPerMonth(@Param('symbol') symbol: string, @Query() params: TrackedSymbolProfitFetchDto) {
     const res =  await this.symbolsService.findTrackedSymbolProfit(symbol, params)
     
     return res
