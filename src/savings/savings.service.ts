@@ -4,7 +4,7 @@ import { GetSavingsDto } from './dto/get-savings.dto';
 @Injectable()
 export class SavingsService {
   async calculateSavingsCompundInterest(props: GetSavingsDto) {
-    const decimalInterestPercentage = ((Number(props.annualInterestPercentage) / 100) / Number(props.months))
+    const decimalInterestPercentage = ((Number(props.annualInterestPercentage) / 100) / 12)
 
     let totalAccAmount = Number(props.initialAmount)
     let totalProfitAmount = 0
