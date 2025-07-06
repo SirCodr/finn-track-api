@@ -23,6 +23,10 @@ class ApiService {
 
   async get<T>(url: string, params?: Record<string, string | number>) {
     params = params || {};
+
+    if (url.startsWith('search')) {
+      this.http.defaults.baseURL = this.http.defaults.baseURL?.replace('/v8/', '/v1/');
+    }
     return await this.http.get<T>(url, { params });
   }
 
@@ -36,16 +40,6 @@ export class StockApiService extends ApiService {
   constructor(configService: ConfigService) {
     super(
       configService.get<string>('YAHOO_FINANCE_API_URL')
-    );
-  }
-}
-
-@Injectable()
-export class ForexApiService extends ApiService {
-  constructor(configService: ConfigService) {
-    super(
-      configService.get<string>('TWELVEDATA_FOREX_API_URL'),
-      configService.get<string>('TWELVEDATA_FOREX_API_KEY')
     );
   }
 }

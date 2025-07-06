@@ -6,6 +6,13 @@ import { SymbolsService } from './symbols.service';
 export class SymbolsController {
   constructor(private symbolsService: SymbolsService){}
 
+  @Get('search')
+  async searchSymbols(@Query('query') query: string) {
+    const response = await this.symbolsService.searchSymbols(query)
+
+    return response.data
+  }
+
   @Get(':symbol')
   async findSymbol(@Param('symbol') symbol: string) {
     const response = await this.symbolsService.findSymbol(symbol)
@@ -25,12 +32,5 @@ export class SymbolsController {
     const res =  await this.symbolsService.findTrackedSymbolProfit(symbol, params)
     
     return res
-  }
-
-  @Get('search')
-  async searchSymbols(@Query('query') query: string) {
-    const response = await this.symbolsService.searchSymbols(query)
-
-    return response.data
   }
 }

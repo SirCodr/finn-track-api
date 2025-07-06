@@ -101,7 +101,7 @@ export class SymbolsService {
   }
 
   async findSymbol(symbol: string) {
-    return await this.stockApi.get<SymbolsHistoryResponse>(`/symbol/${symbol}`)
+    return await this.stockApi.get<SymbolsHistoryResponse>(`chart/${symbol}`)
   }
 
   async findSymbolHistory(symbol: string, options: SymbolHistoryFetchParams) {
@@ -114,7 +114,7 @@ export class SymbolsService {
   }
 
   async searchSymbols(query: string) {
-    return await this.stockApi.get<SymbolsSearchResponse>(`/search`, {
+    return await this.stockApi.get<SymbolsSearchResponse>(`search`, {
       q: query,
     })
   }

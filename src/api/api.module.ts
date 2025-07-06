@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { ForexApiService, StockApiService } from './api.service';
+import { StockApiService } from './api.service';
 
 @Module({
   imports: [ConfigModule],
-  providers: [StockApiService, ForexApiService],
-  exports: [StockApiService, ForexApiService]
+  providers: [StockApiService],
+  exports: [StockApiService]
 })
 export class ApiModule {}
