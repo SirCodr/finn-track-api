@@ -12,21 +12,23 @@ export class SavingsService {
 
     const res = {}
     for (let currentMonth = 1; currentMonth <= props.months; currentMonth++) {
-      const profitAmountBeforeMonthlyAmount = (totalAccAmount * decimalInterestPercentage)
+      let profitAmount = 0
 
       if (currentMonth === 1) {
-        totalAccAmount = (totalAccAmount + profitAmountBeforeMonthlyAmount)
+        profitAmount = (totalAccAmount * decimalInterestPercentage)
+        totalAccAmount = (totalAccAmount + profitAmount)
       } else {
-        totalAccAmount = (totalAccAmount + profitAmountBeforeMonthlyAmount + Number(props.monthlyAmount))
+        profitAmount = ((totalAccAmount + Number(props.monthlyAmount)) * decimalInterestPercentage)
+        totalAccAmount = (totalAccAmount + profitAmount + Number(props.monthlyAmount))
         totalAccNonProfitAmount += Number(props.monthlyAmount)
       }
 
-      totalProfitAmount += profitAmountBeforeMonthlyAmount
+      totalProfitAmount += profitAmount
 
       res[`month-${currentMonth}`] = {
         accNonProfitAmount: totalAccNonProfitAmount,
         accumulatedAmount: totalAccAmount,
-        profitAmount: profitAmountBeforeMonthlyAmount,
+        profitAmount,
         accProfitAmount: totalProfitAmount
       }
     }
