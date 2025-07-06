@@ -113,3 +113,21 @@ export interface Post {
     end:       number;
     gmtoffset: number;
 }
+
+export type SymbolsSearchResponse = {
+    explains: string[],
+    count: number,
+    quotes: SymbolsSearchQuote[]
+}
+
+export type SymbolsSearchQuote = {
+    exchange: string,
+    shortname: string,
+    quoteType: string,
+    symbol: string,
+    index: string,
+    score: number,
+    typeDisp: string,
+    exchDisp: string,
+    longname?: string,
+}

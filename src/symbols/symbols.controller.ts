@@ -7,6 +7,13 @@ export class SymbolsController {
   constructor(private symbolsService: SymbolsService){}
 
   @Get(':symbol')
+  async findSymbol(@Param('symbol') symbol: string) {
+    const response = await this.symbolsService.findSymbol(symbol)
+
+    return response.data
+  }
+
+  @Get(':symbol/history')
   async findSymbolHistory(@Param('symbol') symbol: string, @Query() options: SymbolHistoryFetchOptionsDto) {
     const response = await this.symbolsService.findSymbolHistory(symbol, options)
 
@@ -18,5 +25,12 @@ export class SymbolsController {
     const res =  await this.symbolsService.findTrackedSymbolProfit(symbol, params)
     
     return res
+  }
+
+  @Get('search')
+  async searchSymbols(@Query('query') query: string) {
+    const response = await this.symbolsService.searchSymbols(query)
+
+    return response.data
   }
 }

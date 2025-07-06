@@ -3,26 +3,16 @@ import { StockApiService } from 'src/api/api.service'
 import {
   SymbolHistoryFetchParams,
   SymbolsHistoryResponse,
+  SymbolsSearchResponse,
   TrackedSymbolProfitFetchParams,
 } from './types'
-import { CurrencyPairService } from 'src/currency-pair/currency-pair.service'
 import { DateTime } from 'luxon'
 
 @Injectable()
 export class SymbolsService {
   constructor(
     private stockApi: StockApiService,
-    private currencyPairService: CurrencyPairService
   ) {}
-
-  async findSymbolHistory(symbol: string, options: SymbolHistoryFetchParams) {
-    const { interval, startDate, endDate } = options
-    return await this.stockApi.get<SymbolsHistoryResponse>(`chart/${symbol}`, {
-      interval,
-      period1: DateTime.fromFormat(startDate, 'yyyy-LL-dd').toSeconds(),
-      period2: DateTime.fromFormat(endDate, 'yyyy-LL-dd').toSeconds(),
-    })
-  }
 
   async findTrackedSymbolProfit(
     symbol: string,
@@ -108,5 +98,24 @@ export class SymbolsService {
           availableSymbolValuation,
       },
     }
+  }
+
+  async findSymbol(symbol: string) {
+    return await this.stockApi.get<SymbolsHistoryResponse>(`/symbol/${symbol}`)
+  }
+
+  async findSymbolHistory(symbol: string, options: SymbolHistoryFetchParams) {
+    const { interval, startDate, endDate } = options
+    return await this.stockApi.get<SymbolsHistoryResponse>(`chart/${symbol}`, {
+      interval,
+      period1: DateTime.fromFormat(startDate, 'yyyy-LL-dd').toSeconds(),
+      period2: DateTime.fromFormat(endDate, 'yyyy-LL-dd').toSeconds(),
+    })
+  }
+
+  async searchSymbols(query: string) {
+    return await this.stockApi.get<SymbolsSearchResponse>(`/search`, {
+      q: query,
+    })
   }
 }

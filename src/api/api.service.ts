@@ -21,7 +21,8 @@ class ApiService {
     });
   }
 
-  async get<T>(url: string, params: Record<string, string | number>) {
+  async get<T>(url: string, params?: Record<string, string | number>) {
+    params = params || {};
     return await this.http.get<T>(url, { params });
   }
 
